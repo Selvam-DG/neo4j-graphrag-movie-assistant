@@ -1,25 +1,32 @@
 = Neo4j GraphRAG Portfolio Project
+Selvam-DG
+:toc:
+:toclevels: 3
+:source-highlighter: highlight.js
 
 This repository contains a personal GraphRAG project built with Neo4j and Python.
 
 The project demonstrates how Neo4j can be used with large language models to retrieve graph-based context and generate grounded responses.
 
-It includes examples of:
+The project includes examples of:
 
 * Vector retrieval
 * Vector-based GraphRAG
 * Vector and Cypher retrieval
 * Text-to-Cypher generation
 * Neo4j GraphRAG pipelines
-* Environment validation and automated testing
+* Environment validation
+* Automated testing
 
 == Project Background
 
-This project was created while studying the link:https://graphacademy.neo4j.com/courses/genai-fundamentals/[Neo4j and Generative AI Fundamentals course^] from link:[https://graphacademy.neo4j.com[Neo4j](https://graphacademy.neo4j.com[Neo4j) GraphAcademy^].
+This project was created while studying the link:https://graphacademy.neo4j.com/courses/genai-fundamentals/[Neo4j and Generative AI Fundamentals course^] from link:https://graphacademy.neo4j.com/[Neo4j GraphAcademy^].
 
-The course material was used as a learning foundation. The repository has been adapted and extended as a personal portfolio project.
+The course material was used as a learning foundation. This repository has been adapted and extended as a personal portfolio project.
 
 Neo4j GraphAcademy and the original course authors retain ownership of their original course content.
+
+This repository is an independent learning project and is not an official Neo4j product.
 
 == Technologies
 
@@ -29,12 +36,12 @@ Neo4j GraphAcademy and the original course authors retain ownership of their ori
 * Neo4j GraphRAG for Python
 * Vector search
 * Large language models
-* python-dotenv
-* pytest
+* `python-dotenv`
+* `pytest`
 
 == Project Structure
 
-## [source,text]
+[source,text]
 
 graphrag_app/
 ├── test_environment.py
@@ -42,7 +49,7 @@ graphrag_app/
 ├── vector_cypher_rag.py
 ├── vector_rag.py
 └── vector_retriever.py
------------------------
+
 
 == Features
 
@@ -56,51 +63,67 @@ Combines Neo4j vector retrieval with a large language model to generate answers 
 
 === Vector and Cypher GraphRAG
 
-Uses vector search together with Cypher queries to retrieve both semantically relevant content and connected graph information.
+Uses vector search together with Cypher queries to retrieve semantically relevant content and connected graph information.
 
 === Text-to-Cypher GraphRAG
 
-Converts natural-language questions into Cypher queries and uses the results as context for an LLM-generated response.
+Converts natural-language questions into Cypher queries and uses the query results as context for an LLM-generated response.
 
 == Setup
 
+=== Clone the Repository
+
 Clone the repository and enter the project directory.
 
-## [source,sh]
+[source,sh]
 
-git clone https://github.com/Selvam-DG/genai-graphrag-portfolio.git
-cd genai-graphrag-portfolio
----------------------------
+git clone https://github.com/Selvam-DG/neo4j-graphrag-movie-assistant.git
+cd neo4j-graphrag-movie-assistant
+
+
+=== Create a Virtual Environment
 
 Create a Python virtual environment.
 
-## [source,sh]
+[source,sh]
 
 python -m venv .venv
 source .venv/bin/activate
--------------------------
 
-Install the dependencies.
 
-## [source,sh]
+On Windows PowerShell, use:
 
-## pip install -r requirements.txt
+[source,powershell]
+
+source .venv\Scripts\Activate.ps1
+
+=== Install Dependencies
+
+Install the required Python packages.
+
+[source,sh]
+
+pip install --upgrade pip
+pip install -r requirements.txt
+
+
+=== Configure Environment Variables
 
 Create a `.env` file using `.env.example` as a template.
 
-## [source,sh]
+[source,sh]
 
-## cp .env.example .env
+ cp .env.example .env
 
 Add your Neo4j and LLM credentials to `.env`.
 
-## [source,env]
+[source,env]
 
 NEO4J_URI=neo4j+s://your-instance.databases.neo4j.io
 NEO4J_USERNAME=neo4j
 NEO4J_PASSWORD=your-password
 OPENAI_API_KEY=your-api-key
----------------------------
+
 
 Do not commit the `.env` file.
 
@@ -108,49 +131,64 @@ Do not commit the `.env` file.
 
 Run the environment validation script.
 
-## [source,sh]
+[source,sh]
 
-## python graphrag_app/test_environment.py
+python graphrag_app/test_environment.py
+
+The script verifies that:
+
+* Required environment variables are available
+* The Neo4j database can be reached
+* Required Python packages are installed
+* The configured LLM provider can be accessed
 
 == Running the Examples
 
+=== Vector Retriever
+
 Run the vector retriever example.
 
-## [source,sh]
+[source,sh]
 
-## python graphrag_app/vector_retriever.py
+python graphrag_app/vector_retriever.py
 
-Run the vector GraphRAG example.
+=== Vector GraphRAG
 
-## [source,sh]
+Run the vector-based GraphRAG example.
 
-## python graphrag_app/vector_rag.py
+[source,sh]
+
+python graphrag_app/vector_rag.py
+
+=== Vector and Cypher GraphRAG
 
 Run the vector and Cypher GraphRAG example.
 
-## [source,sh]
+[source,sh]
 
-## python graphrag_app/vector_cypher_rag.py
+python graphrag_app/vector_cypher_rag.py
+
+=== Text-to-Cypher GraphRAG
 
 Run the Text-to-Cypher example.
 
-## [source,sh]
+[source,sh]
 
-## python graphrag_app/text2cypher_rag.py
+python graphrag_app/text2cypher_rag.py
 
 == Testing
 
-Install pytest if it is not already installed.
+Install `pytest` if it is not already installed.
 
-## [source,sh]
+[source,sh]
 
-## pip install pytest
+pip install pytest
 
-Run the tests.
+Run the test suite.
 
-## [source,sh]
+[source,sh]
 
-## pytest
+pytest
 
 == Security
 
@@ -158,11 +196,20 @@ Credentials are loaded from environment variables.
 
 Never commit:
 
-* `.env`
+* `.env` files
 * API keys
 * Neo4j passwords
 * Database credentials
 * Private certificates
+* Access tokens
+
+Confirm that `.env` is not tracked before committing.
+
+[source,sh]
+
+git ls-files | grep -E '(^|/).env$'
+
+The command should return no output.
 
 == Future Improvements
 
@@ -173,9 +220,10 @@ Planned improvements include:
 * Retriever performance comparisons
 * Source citations in generated answers
 * Conversation history
-* Automated GitHub Actions testing
+* Automated testing with GitHub Actions
 * Docker support
 * Retrieval quality evaluation
+* Improved logging and error handling
 
 == Acknowledgements
 
@@ -184,5 +232,9 @@ This project was inspired by and initially developed through the Neo4j GraphAcad
 Official learning resource:
 
 link:https://graphacademy.neo4j.com/courses/genai-fundamentals/[Neo4j and Generative AI Fundamentals^]
+
+Neo4j GraphRAG Python package:
+
+link:https://github.com/neo4j/neo4j-graphrag-python[neo4j-graphrag-python^]
 
 This repository is an independent learning and portfolio project. It is not an official Neo4j product.
